@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CineServer/CineViewer Manual</title>
+  <meta name="description"
+    content="CineServer/CineViewer の設定方法と注意点をまとめたマニュアル / CineServer/CineViewer setup guide and notes." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: [
+              '"Noto Sans JP"',
+              '"Helvetica Neue"',
+              'Helvetica',
+              'Arial',
+              'sans-serif',
+            ],
+          },
+          colors: {
+            primary: {
+              50: '#edf4ff',
+              100: '#dbe8ff',
+              600: '#2563eb',
+              700: '#1d4ed8',
+            },
+            surface: {
+              base: '#f4f6fb',
+              card: '#ffffff',
+              text: '#111827',
+              muted: '#4b5563',
+            },
+          },
+          boxShadow: {
+            material: '0 10px 30px rgba(17, 24, 39, 0.12), 0 2px 8px rgba(17, 24, 39, 0.08)',
+            soft: '0 4px 14px rgba(17, 24, 39, 0.08)',
+          },
+        },
+      },
+    };
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap"
+    rel="stylesheet" />
+  <style>
+    .hero-bg {
+      background:
+        radial-gradient(circle at 15% 10%, rgba(37, 99, 235, 0.2), transparent 36%),
+        radial-gradient(circle at 85% 0%, rgba(59, 130, 246, 0.18), transparent 40%),
+        linear-gradient(160deg, #f7f9ff 0%, #eef2ff 55%, #e7ecff 100%);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .fade-up {
+        animation: fadeUp 0.8s ease both;
+      }
+
+      .fade-up.delay {
+        animation-delay: 0.15s;
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-surface-base text-surface-text">
+  <header class="hero-bg">
+    <div class="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
+      <div class="fade-up rounded-3xl border border-blue-100/80 bg-white/70 p-7 shadow-material backdrop-blur sm:p-10">
+        <h1 id="page-title" class="text-2xl font-extrabold leading-tight sm:text-4xl">CineServer/CineViewer マニュアル</h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
+    <div class="fade-up delay mb-5 inline-flex rounded-xl bg-white p-1 shadow-soft ring-1 ring-slate-200" role="tablist"
+      aria-label="Language tabs">
+      <button id="tab-ja" class="rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white" role="tab"
+        aria-selected="true" data-lang="ja">
+        Japanese
+      </button>
+      <button id="tab-en" class="rounded-lg px-4 py-2 text-sm font-semibold text-slate-600" role="tab"
+        aria-selected="false" data-lang="en">
+        English
+      </button>
+    </div>
+
+    <section class="fade-up delay space-y-5">
+      <div data-content="ja" class="space-y-5">
+        <div class="-mx-2 sm:-mx-4 lg:-mx-6">
+          <img src="../diagram.jpg" class="block h-auto w-full" />
+        </div>
+
+        <article class="rounded-2xl bg-surface-card p-6 shadow-soft ring-1 ring-slate-100">
+          <h2 class="text-lg font-bold">設定方法</h2>
+          <ol class="mt-4 list-decimal space-y-2 pl-5 text-sm leading-7 text-surface-muted">
+            <li>App StoreからiPhoneにCineServerを、Apple Vision ProにCineViewerをインストール</li>
+            <li>PC/MacからBlackmagic CameraソフトウェアでURSA Cine ImmersiveのSMBファイル共有を有効にする</li>
+            <div class="mt-4">
+              <img src="../blackmagic_setup.webp"
+                class="block h-auto w-full rounded-xl border border-slate-100 shadow-soft sm:w-96"
+                alt="Blackmagic setup" />
+            </div>
+            <li>遅延を短くするため、URSA Cine Immersiveの画質設定を固定クオリティのQ5に変更</li>
+            <li>
+              Wifi接続
+              <ul class="mt-2 list-disc space-y-1 pl-5">
+                <li>iPhoneでWifiアクセスポイントを作成 (子機同士が通信できるWifiがある場合はスキップ可能)</li>
+                <li>iPhoneで「設定→インターネット共有→ほかの人の接続を許可」をオンにしてパスワードを設定</li>
+                <li>URSA Cine ImmersiveとApple Vision ProをiPhoneのWifiアクセスポイントに接続</li>
+                <div class="mt-4">
+                  <img src="../iphone_jp.webp"
+                    class="block h-auto w-full rounded-xl border border-slate-100 shadow-soft sm:w-96"
+                    alt="iPhone JP" />
+                </div>
+              </ul>
+            </li>
+            <li>
+              URSA Cine Immersiveの左側にある"Still"ボタンで写真を撮影 (既にメディア内に写真がある場合は不要)
+              <div class="mt-4">
+                <img src="../cine_immersive_still.webp"
+                  class="block h-auto w-full rounded-xl border border-slate-100 shadow-soft sm:w-96"
+                  alt="Still button" />
+              </div>
+            </li>
+            <li>iPhoneでCineServerを起動し、SMBサーバーが見つかるのを確認</li>
+            <li>Apple Vision ProでCineViewerを起動してCineServerへ接続し、写真をプレビュー</li>
+            <li>その後、Stillで写真を撮影すると自動でApple Vision Proへ反映</li>
+          </ol>
+        </article>
+
+        <article class="rounded-2xl bg-surface-card p-6 shadow-soft ring-1 ring-slate-100">
+          <h2 class="text-lg font-bold">遅延</h2>
+          <p class="mt-3 text-sm leading-7 text-surface-muted">
+            撮影ビットレートにもよりますが数秒です。情報量の多い写真だとサイズが大きくなって遅くなります。iPhoneのWifiアクセスポイントの代わりに、高速なWifiルーターを使うと少し速くなります
+          </p>
+          <p class="mt-2 text-sm leading-7 text-surface-muted">
+            現場の施設のWifiなどはセキュリティ上避けて下さい。
+          </p>
+          <p class="mt-2 text-sm leading-7 text-surface-muted">
+            このアプリはインターネットには写真データを送らず、Wifi経由でiPhoneとApple Vision Proのみにデータを送ります。
+          </p>
+        </article>
+
+        <article class="rounded-2xl bg-surface-card p-6 shadow-soft ring-1 ring-slate-100">
+          <h2 class="text-lg font-bold">注意点</h2>
+          <p class="mt-3 text-sm leading-7 text-surface-muted">
+            見える範囲はモニターのデフォルト設定の180 Fisheyeとほぼ同じです。
+          </p>
+          <p class="mt-2 text-sm leading-7 text-surface-muted">
+            URSA Cine ImmersiveのWifi設定変更が不安定で、たまに画面がフリーズしますが再起動で直ります。変更さえ成功すればその後は問題を経験していません
+          </p>
+        </article>
+
+        <article class="rounded-2xl bg-surface-card p-6 shadow-soft ring-1 ring-slate-100">
+          <h2 class="text-lg font-bold">トラブルシューティング</h2>
+          <p class="mt-3 text-sm leading-7 text-surface-muted">
+            撮影した画像がエラーが出たりモノラル画像になった場合は固定ビットレートの18:1にして下さい。遅延は増加しますが安定しやすくなります。
+          </p>
+        </article>
+
+        <article class="rounded-2xl bg-surface-card p-6 shadow-soft ring-1 ring-slate-100">
+          <h2 class="text-lg font-bold">連絡先</h2>
+          <p class="mt-3 text-sm leading-7 text-surface-muted">
+            クリス (
+            <a class="font-medium text-primary-700 underline decoration-primary-600/40 underline-offset-4 hover:text-primary-600"
+              href="https://x.com/christ1nu">https://x.com/christ1nu</a>
+            )
+          </p>
+        </article>
+      </div>
+
+      <div data-content="en" class="hidden space-y-5">
+        <div class="-mx-2 sm:-mx-4 lg:-mx-6">
+          <img src="../diagram_en.jpg" class="block h-auto w-full" />
+        </div>
+
+        <article class="rounded-2xl bg-surface-card p-6 shadow-soft ring-1 ring-slate-100">
+          <h2 class="text-lg font-bold">Setup</h2>
+          <ol class="mt-4 list-decimal space-y-2 pl-5 text-sm leading-7 text-surface-muted">
+            <li>Install CineServer on iPhone and CineViewer on Apple Vision Pro through AppStore.</li>
+            <li>On a PC or Mac, use Blackmagic Camera software to enable SMB file sharing for URSA Cine Immersive.</li>
+            <div class="mt-4">
+              <img src="../blackmagic_setup.webp"
+                class="block h-auto w-full rounded-xl border border-slate-100 shadow-soft sm:w-96"
+                alt="Blackmagic setup" />
+            </div>
+            <li>To reduce latency, set image quality to Constant Quality Q5 on URSA Cine Immersive.</li>
+            <li>
+              Wi-Fi Connection
+              <ul class="mt-2 list-disc space-y-1 pl-5">
+                <li>Create a Wi-Fi hotspot on iPhone. (You can skip this if you already have a Wi-Fi network where
+                  devices can communicate with each other.)</li>
+                <li>On iPhone, go to Settings > Personal Hotspot (or Settings > Cellular > Personal Hotspot), turn on
+                  Allow Others to Join, and set a Wi-Fi Password.</li>
+                <li>Connect URSA Cine Immersive and Apple Vision Pro to the iPhone Wi-Fi hotspot.</li>
+                <div class="mt-4">
+                  <img src="../iphone_en.webp"
+                    class="block h-auto w-full rounded-xl border border-slate-100 shadow-soft sm:w-96"
+                    alt="iPhone EN" />
+                </div>
+              </ul>
+            </li>
+            <li>
+              Take a photo using the "Still" button on the left side of URSA Cine Immersive. (Skip this step if photos
+              are already stored on the media.)
+              <div class="mt-4">
+                <img src="../cine_immersive_still.webp"
+                  class="block h-auto w-full rounded-xl border border-slate-100 shadow-soft sm:w-96"
+                  alt="Still button" />
+              </div>
+            </li>
+            <li>Launch CineServer on iPhone, then make sure that the SMB server is detected.</li>
+            <li>Launch CineViewer on Apple Vision Pro, connect to CineServer, and preview photos.</li>
+            <li>After setup, each new photo captured with Still is automatically reflected on Apple Vision Pro.</li>
+          </ol>
+        </article>
+
+        <article class="rounded-2xl bg-surface-card p-6 shadow-soft ring-1 ring-slate-100">
+          <h2 class="text-lg font-bold">Latency</h2>
+          <p class="mt-3 text-sm leading-7 text-surface-muted">
+            Using an iPhone hotspot usually results in 10+ seconds of delay. With a fast Wi-Fi router, delay is
+            typically a few seconds. Images with more detail are larger and may take longer.
+          </p>
+          <p class="mt-2 text-sm leading-7 text-surface-muted">
+            For security reasons, avoid using on-site facility Wi-Fi networks.
+          </p>
+          <p class="mt-2 text-sm leading-7 text-surface-muted">
+            This app does not send photo data to the internet. Data is sent only between iPhone and Apple Vision Pro
+            over Wi-Fi.
+          </p>
+        </article>
+
+        <article class="rounded-2xl bg-surface-card p-6 shadow-soft ring-1 ring-slate-100">
+          <h2 class="text-lg font-bold">Notes</h2>
+          <p class="mt-3 text-sm leading-7 text-surface-muted">
+            The visible range is almost the same as the monitor's default 180 Fisheye setting.
+          </p>
+          <p class="mt-2 text-sm leading-7 text-surface-muted">
+            Changing Wi-Fi settings on URSA Cine Immersive can be unstable, and the screen may occasionally freeze, but
+            restarting usually resolves it. Once the change succeeds, we have not experienced issues afterward.
+          </p>
+        </article>
+
+        <article class="rounded-2xl bg-surface-card p-6 shadow-soft ring-1 ring-slate-100">
+          <h2 class="text-lg font-bold">Troubleshooting</h2>
+          <p class="mt-3 text-sm leading-7 text-surface-muted">
+            If captured images show errors or appear as monoscopic images, set the fixed bitrate to 18:1. Latency will
+            increase, but stability generally improves.
+          </p>
+        </article>
+
+        <article class="rounded-2xl bg-surface-card p-6 shadow-soft ring-1 ring-slate-100">
+          <h2 class="text-lg font-bold">Contact</h2>
+          <p class="mt-3 text-sm leading-7 text-surface-muted">
+            Chris (
+            <a class="font-medium text-primary-700 underline decoration-primary-600/40 underline-offset-4 hover:text-primary-600"
+              href="https://x.com/christ1nu">https://x.com/christ1nu</a>
+            )
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+  <script>
+    const tabs = document.querySelectorAll('[data-lang]');
+    const panels = {
+      ja: document.querySelector('[data-content=\"ja\"]'),
+      en: document.querySelector('[data-content=\"en\"]'),
+    };
+    const title = document.getElementById('page-title');
+
+    function updateLanguageQuery(lang) {
+      const url = new URL(window.location.href);
+      if (lang === 'en') {
+        url.searchParams.set('hl', 'en');
+      } else {
+        url.searchParams.delete('hl');
+      }
+      history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
+    }
+
+    function setLanguage(lang) {
+      const isJapanese = lang === 'ja';
+      panels.ja.classList.toggle('hidden', !isJapanese);
+      panels.en.classList.toggle('hidden', isJapanese);
+      title.textContent = isJapanese ? 'CineServer/CineViewer マニュアル' : 'CineServer/CineViewer Manual';
+      document.documentElement.lang = isJapanese ? 'ja' : 'en';
+
+      tabs.forEach((tab) => {
+        const active = tab.dataset.lang === lang;
+        tab.setAttribute('aria-selected', active ? 'true' : 'false');
+        tab.classList.toggle('bg-primary-600', active);
+        tab.classList.toggle('text-white', active);
+        tab.classList.toggle('text-slate-600', !active);
+      });
+
+      updateLanguageQuery(lang);
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => setLanguage(tab.dataset.lang));
+    });
+
+    const initialLang = new URLSearchParams(window.location.search).get('hl') === 'en' ? 'en' : 'ja';
+    setLanguage(initialLang);
+  </script>
+</body>
+
+</html>
