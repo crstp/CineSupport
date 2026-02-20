@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CineServer/CineViewer Manual</title>
+  <title>CineServer/CineLink Manual</title>
   <meta name="description"
-    content="CineServer/CineViewer の設定方法と注意点をまとめたマニュアル / CineServer/CineViewer setup guide and notes." />
+    content="CineServer/CineLink の設定方法と注意点をまとめたマニュアル / CineServer/CineLink setup guide and notes." />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -81,7 +81,7 @@
   <header class="hero-bg">
     <div class="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
       <div class="fade-up rounded-3xl border border-blue-100/80 bg-white/70 p-7 shadow-material backdrop-blur sm:p-10">
-        <h1 id="page-title" class="text-2xl font-extrabold leading-tight sm:text-4xl">CineServer/CineViewer マニュアル</h1>
+        <h1 id="page-title" class="text-2xl font-extrabold leading-tight sm:text-4xl">CineServer/CineLink マニュアル</h1>
       </div>
     </div>
   </header>
@@ -108,7 +108,7 @@
         <article class="rounded-2xl bg-surface-card p-6 shadow-soft ring-1 ring-slate-100">
           <h2 class="text-lg font-bold">設定方法</h2>
           <ol class="mt-4 list-decimal space-y-2 pl-5 text-sm leading-7 text-surface-muted">
-            <li>App StoreからiPhoneにCineServerを、Apple Vision ProにCineViewerをインストール</li>
+            <li>App StoreからiPhoneにCineServerを、Apple Vision ProにCineLinkをインストール</li>
             <li>PC/MacからBlackmagic CameraソフトウェアでURSA Cine ImmersiveのSMBファイル共有を有効にする</li>
             <div class="mt-4">
               <img src="../blackmagic_setup.webp"
@@ -141,7 +141,7 @@
               </div>
             </li>
             <li>iPhoneでCineServerを起動し、SMBサーバーが見つかるのを確認</li>
-            <li>Apple Vision ProでCineViewerを起動してCineServerへ接続し、写真をプレビュー</li>
+            <li>Apple Vision ProでCineLinkを起動してCineServerへ接続し、写真をプレビュー</li>
             <li>その後、Stillで写真を撮影すると自動でApple Vision Proへ反映</li>
           </ol>
         </article>
@@ -195,7 +195,7 @@
         <article class="rounded-2xl bg-surface-card p-6 shadow-soft ring-1 ring-slate-100">
           <h2 class="text-lg font-bold">Setup</h2>
           <ol class="mt-4 list-decimal space-y-2 pl-5 text-sm leading-7 text-surface-muted">
-            <li>Install CineServer on iPhone and CineViewer on Apple Vision Pro through AppStore.</li>
+            <li>Install CineServer on iPhone and CineLink on Apple Vision Pro through AppStore.</li>
             <li>On a PC or Mac, use Blackmagic Camera software to enable SMB file sharing for URSA Cine Immersive.</li>
             <div class="mt-4">
               <img src="../blackmagic_setup.webp"
@@ -231,7 +231,7 @@
               </div>
             </li>
             <li>Launch CineServer on iPhone, then make sure that the SMB server is detected.</li>
-            <li>Launch CineViewer on Apple Vision Pro, connect to CineServer, and preview photos.</li>
+            <li>Launch CineLink on Apple Vision Pro, connect to CineServer, and preview photos.</li>
             <li>After setup, each new photo captured with Still is automatically reflected on Apple Vision Pro.</li>
           </ol>
         </article>
@@ -305,7 +305,7 @@
       const isJapanese = lang === 'ja';
       panels.ja.classList.toggle('hidden', !isJapanese);
       panels.en.classList.toggle('hidden', isJapanese);
-      title.textContent = isJapanese ? 'CineServer/CineViewer マニュアル' : 'CineServer/CineViewer Manual';
+      title.textContent = isJapanese ? 'CineServer/CineLink マニュアル' : 'CineServer/CineLink Manual';
       document.documentElement.lang = isJapanese ? 'ja' : 'en';
 
       tabs.forEach((tab) => {
